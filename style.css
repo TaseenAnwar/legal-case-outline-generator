@@ -1,0 +1,42 @@
+/* Custom CSS for Taseen's Case Outlines */
+
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.spinner {
+    border-top-color: #3B82F6;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Enhance readability of case outline */
+#caseOutline section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+#caseOutline section:last-child {
+    border-bottom: none;
+}
+
+/* Highlight important sections */
+#caseOutline h3 {
+    color: #1E40AF;
+    border-left: 4px solid #3B82F6;
+    padding-left: 0.75rem;
+}
+
+/* Quote styling */
+#relevantQuotes li {
+    font-style: italic;
+    color: #4B5563;
+    padding: 0.5rem;
+    background-color: #f3f4f6;
+    border-radius: 0.25rem;
+}
