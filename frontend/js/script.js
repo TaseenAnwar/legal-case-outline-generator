@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to send PDF text to backend
     async function generateCaseOutline(pdfText) {
         try {
-            const response = await fetch('/generate-outline', {
+            const response = await fetch('http://localhost:3000/generate-outline', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
