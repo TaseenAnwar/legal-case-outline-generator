@@ -20,7 +20,9 @@ const openai = new OpenAI({
 // Middleware
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
-app.use(express.static(path.join(__dirname, '../frontend')));
+
+// Serve static files from the root directory instead of ../frontend
+app.use(express.static(path.join(__dirname, '..')));
 
 // Routes
 app.post('/generate-outline', async (req, res) => {
@@ -100,9 +102,9 @@ function checkIfLegalCase(text) {
   return termCount >= 5;
 }
 
-// For direct HTML requests, serve the frontend
+// For direct HTML requests, serve the frontend from the root directory
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 // Start server
