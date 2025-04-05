@@ -41,7 +41,7 @@ app.post('/generate-outline', async (req, res) => {
 
     // Call OpenAI API
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-4o-mini",
       messages: [
         {
           role: "system",
