@@ -120,6 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show outline, hide spinner
         loadingSpinner.classList.add('hidden');
         caseOutline.classList.remove('hidden');
+        
+        // Add animation class after a small delay
+        setTimeout(() => {
+            caseOutline.classList.add('show');
+        }, 50);
     }
 
     // Form submission handler
