@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const caseOutline = document.getElementById('caseOutline');
     const errorMessage = document.getElementById('errorMessage');
 
+    // Load PDF.js
+    const pdfjsLib = window['pdfjs-dist/build/pdf'];
+    // Set the worker source
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
     // Function to extract PDF text
     async function extractPDFText(file) {
         return new Promise((resolve, reject) => {
@@ -36,7 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to send PDF text to backend
     async function generateCaseOutline(pdfText) {
         try {
-            const response = await fetch('http://localhost:3000/generate-outline', {
+            // Use the deployed Render.com URL in production
+            const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? 'http://localhost:3000/generate-outline'
+                : 'https://your-render-app-name.onrender.com/generate-outline';
+
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -45,7 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to generate case outline');
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to generate case outline');
             }
 
             return await response.json();
@@ -141,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Error processing PDF:', error);
-            errorMessage.textContent = 'Error processing the PDF. Please try again or ensure it is a valid legal case document.';
+            errorMessage.textContent = error.message || 'Error processing the PDF. Please try again or ensure it is a valid legal case document.';
             errorMessage.classList.remove('hidden');
             loadingSpinner.classList.add('hidden');
         }
