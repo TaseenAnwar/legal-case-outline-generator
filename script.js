@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Use the deployed Render.com URL in production
             const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
                 ? 'http://localhost:3000/generate-outline'
-                : 'https://your-render-app-name.onrender.com/generate-outline';
+                : 'https://legal-case-outline-api.onrender.com';
 
             const response = await fetch(apiUrl, {
                 method: 'POST',
